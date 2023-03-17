@@ -1,0 +1,20 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "axios": "^1.3.4",
+        "laravel-vite-plugin": "^0.7.2",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "classnames": "^2.3.2",
+        "react-icons": "^4.8.0",
+        "react-router": "^6.9.0",
+        "react-router-dom": "^6.9.0",
+        "styled-components": "^5.3.9",
+        "swiper": "^9.1.0"
+    }
+}
