@@ -23,6 +23,10 @@ let PageSize = 10;
 const Home = () => {
     const { products, productsHot } = useContext(ProductsContext);
 
+
+    const aa = productsHot.filter((p) => p.rating.count > 150);
+    console.log(aa);
+
     const { swiperRef, swiperRef1 } = useContext(SlideContext);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -84,7 +88,7 @@ const Home = () => {
                     </div>
                 </div>
 
-                <ProductSlide swiperRef={swiperRef} data={productsHot} />
+                <ProductSlide swiperRef={swiperRef} data={aa} />
             </section>
 
             <section className="flex flex-col gap-20 cs-container ">

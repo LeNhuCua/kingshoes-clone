@@ -77,12 +77,12 @@ function App() {
                         <div className="mt-8">
                             <Register />
                             <Footer />
-                            <CopyRight/>
+                            <CopyRight />
                         </div>
 
                         <ScrollButton />
                     </div>
-             
+
                     {isOpenSidebar ? <Sidebar /> : ""}
                     <div
                         className={`absolute xl:w-0 xl:h-0 ${

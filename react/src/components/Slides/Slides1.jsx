@@ -38,8 +38,8 @@ export default function Slides1() {
                     <SwiperSlide key={slide.id}>
                         <a href="###">
                             <div
-                                className="flex items-center justify-center bg-cover bg-center bg-no-repeat h-[200px] md:h-[300px] xl:h-[700px]"
-                                style={{ backgroundImage: `url(http://127.0.0.1:8000/uploads/images/${slide.image}.jpg)` }}
+                                className="flex items-center justify-center bg-contain bg-center bg-no-repeat h-[200px] md:h-[300px] xl:h-[700px]"
+                                style={{ backgroundImage: `url(${slide.image})` }}
                             ></div>
                         </a>
                     </SwiperSlide>

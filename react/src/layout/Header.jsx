@@ -12,12 +12,46 @@ import { SidebarContext } from "../hook/SidebarContext";
 import { Link } from "react-router-dom";
 import CustomLink from "../routes/CustomLink";
 import { CartsContext } from "../hook/CartsContext";
+import { ProductsContext } from "../hook/ProductsContext";
+import { useForm } from "react-hook-form";
 const Header = () => {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm();
+
     const { searchOpen, Open } = useContext(MenusContext);
     const { isOpenSidebar, Handle } = useContext(SidebarContext);
+    const { products, setProducts } = useContext(ProductsContext);
+
     const { cart } = useContext(CartsContext);
 
     const [allCart, setAllCart] = useState(0);
+    console.log(products.length);
+
+    const [searchKey, setSearchKey] = useState("");
+
+    const aaa = (e) => {
+        setSearchKey(e.target.value);
+    };
+
+    const searchItems = (search) => {
+        //in a real application, make a request to a remote url with the query and return filtered results, for demo purposes we filter at client side
+        // event.preventDefault()
+        // console.log(event);
+        let _filteredItems = [];
+
+        for (let i = 0; i < products.length; i++) {
+            if (
+                products[i].title.toLowerCase().includes(search.toLowerCase())
+            ) {
+                _filteredItems.push(products[i]);
+            }
+        }
+        setProducts(_filteredItems);
+    };
 
     function sumCart(cart) {
         let sum = 0;
@@ -110,12 +144,17 @@ const Header = () => {
                         searchOpen ? "flex animation" : "hidden"
                     }`}
                 >
-                    <form className="w-full h-[50%]" action="">
+                    <form
+                        className="w-full h-[50%]"
+                        onSubmit={() => handleSubmit(searchItems(searchKey))}
+                    >
                         <div className="border rounded-xl bg-gray-200 px-2 items-center flex left-0 w-full h-[100%] py-5 z-50">
                             <input
                                 className="w-full bg-transparent outline-none border-none placeholder:text-black placeholder:text-xs "
                                 type="text"
                                 placeholder="Nhập từ cần tìm"
+                                onChange={aaa}
+                                value={searchKey}
                             />
                             <AiOutlineClose
                                 className="block text-3xl cs-hover text-red-400"
@@ -128,12 +167,9 @@ const Header = () => {
                     <CustomLink to="/">Trang chủ</CustomLink>
                     <CustomLink to="/introduce">Giới thiệu</CustomLink>
                     <CustomLink to="/adidas" className="relative group">
-                        <a
-                            className="item-menu cs-menuItem before:contents-[''] before:absolute before:w-full before:h-[80%] before:bg-transparent before:-bottom-6 before:left-0 "
-                            href="##"
-                        >
+                     
                             Adidas
-                        </a>
+                      
                         <ul className="absolute z-20 top-[48px] hidden group-hover:block top-bottom w-[280px] bg-white shadow-xl transition-all duration-300">
                             <li className="sub-group h-[40px] border-b px-4 flex items-center font-[500] hover:text-white hover:bg-yellow-300 hover:cursor-pointer transition-all duration-100 ">
                                 <Link
@@ -155,12 +191,9 @@ const Header = () => {
                         </ul>
                     </CustomLink>
                     <CustomLink to="/nike" className="relative group">
-                        <a
-                            className="item-menu cs-menuItem before:contents-[''] before:absolute before:w-full before:h-[80%] before:bg-transparent before:-bottom-6 before:left-0 "
-                            href="##"
-                        >
+                      
                             Nike
-                        </a>
+                     
                         <ul className="absolute z-20 top-[48px] hidden group-hover:block top-bottom w-[280px] bg-white shadow-xl transition-all duration-300">
                             <li className="sub-group h-[40px] border-b px-4 flex items-center font-[500] hover:text-white hover:bg-yellow-300 hover:cursor-pointer transition-all duration-100 ">
                                 <Link
@@ -183,12 +216,9 @@ const Header = () => {
                     </CustomLink>
 
                     <CustomLink to="/yeezy" className="relative group">
-                        <a
-                            className="item-menu cs-menuItem before:contents-[''] before:absolute before:w-full before:h-[80%] before:bg-transparent before:-bottom-6 before:left-0 "
-                            href="##"
-                        >
+                       
                             Yeezy
-                        </a>
+                     
                         <ul className="absolute z-20 top-[48px] hidden group-hover:block top-bottom w-[280px] bg-white shadow-xl transition-all duration-300">
                             <li className="sub-group h-[40px] border-b px-4 flex items-center font-[500] hover:text-white hover:bg-yellow-300 hover:cursor-pointer transition-all duration-100 ">
                                 <Link
@@ -212,18 +242,19 @@ const Header = () => {
                     <CustomLink to="/spa">Spa Giày</CustomLink>
 
                     <CustomLink to="/contacs    ">Liên hệ</CustomLink>
-
                 </ul>
 
                 <div className="flex items-center gap-3">
-                    <form action="">
+                    <form onSubmit={() => handleSubmit(searchItems(searchKey))}>
                         <div className="border rounded-full bg-gray-200  py-2 px-4 items-center hidden md:flex">
                             <input
                                 className="w-full bg-transparent outline-none border-none placeholder:text-black placeholder:text-xs "
                                 type="text"
-                                placeholder="Nhập từ cần tìm"
+                                placeholder="Nhập từ cần tìm "
+                                onChange={aaa}
+                                value={searchKey}
                             />
-                            <button type="submit">
+                            <button type="button">
                                 <AiOutlineSearch
                                     type="submit"
                                     className="block text-3xl cs-hover focus:bg-red-400"

@@ -14,6 +14,7 @@ const ProductsProvider = ({ children }) => {
         .get(allProduct)
         .then(function (response) {
           setProducts(response.data);
+          console.log(response.data);
         })
         .catch(function (error) {
           // handle error
@@ -76,7 +77,7 @@ useEffect(() => {
 
 
   return (
-    <ProductsContext.Provider value={{ products,productsHot ,allslides, allImages}}>
+    <ProductsContext.Provider value={{ products, setProducts,productsHot ,allslides, allImages}}>
       {children}
     </ProductsContext.Provider>
   );

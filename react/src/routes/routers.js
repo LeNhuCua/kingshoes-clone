@@ -19,7 +19,7 @@ const  routes = [
         element: Introduce
     },
     {
-        path: "/productDetail/:alias",
+        path: "/productDetail/:id",
         exact:true,
         element: Detail
     },

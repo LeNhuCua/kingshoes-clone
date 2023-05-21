@@ -20,10 +20,10 @@ const CartsProvider = ({ children }) => {
                 }
             });
             setCart(newCart);
-            alert("Thêm vào giỏ thành công")
+       
         } else {
             setCart([...cart, newItem]);
-            alert("Thêm vào giỏ thành công")
+           
 
         }
     };

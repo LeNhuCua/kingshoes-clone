@@ -10,20 +10,20 @@ const Cart = ({ data }) => {
         <div className="border-b py-4">
             <div className="flex gap-3">
                 <div className="h-[11.875rem] min-w-[11.875rem] ">
-                    <Link to={`/productDetail/${data.alias}`}>
+                    <Link to={`/productDetail/${data.id}`}>
                         <img
                             className="h-full w-full object-cover"
-                            src={`${images}/${data.image}.jpg`}
+                            src={`${data.image}`}
                             alt=""
                         />
                     </Link>
                 </div>
                 <div>
-                    <Link to={`/productDetail/${data.alias}`} className="text-[1.375rem] font-bold text-[#313131] uppercase ">
-                        {data.name}
+                    <Link to={`/productDetail/${data.id}`} className="text-[1.375rem] font-bold text-[#313131] uppercase ">
+                        {data.title}
                     </Link>
 
-                    <span className="font-bold">Size giày: 36.5</span>
+                    <h6 className="font-bold">Size giày: 36.5</h6>
                     <div className="flex gap-1 items-center">
                         <div className="flex items-center  py-5">
                             <div className="border flex items-center justify-center">

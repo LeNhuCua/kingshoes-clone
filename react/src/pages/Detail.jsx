@@ -28,19 +28,19 @@ import { CartsContext } from "../hook/CartsContext";
 const Detail = () => {
     const [activeThumb, setActiveThumb] = useState();
 
-    const { alias } = useParams();
-    const { products, allImages } = useContext(ProductsContext);
-    const findP = products.find((product) => product.alias === alias);
-    let findPImage = null;
-    
+    const { id } = useParams();
+    const { products,allImages } = useContext(ProductsContext);
+
+    const findP = products.find(item => item.id == id);
+
+
+
+  
     const {addToCart} = useContext(CartsContext);
     const { swiperRef1 } = useContext(SlideContext);
     if (!findP) {
         return <Loading />;
-    } else {
-        findPImage  = allImages.filter((product) => product.id_product === findP.id);
-        ChangeTitle(findP.name);
-    }
+    } 
 
     return (
         <div className="cs-container mt-5 flex flex-col gap-16">
@@ -69,10 +69,10 @@ const Detail = () => {
                         }}
                         className="product-images-slider-thumbs  "
                     >
-                        {findPImage.map((item, index) => (
+                        {allImages.map((item, index) => (
                             <SwiperSlide key={index}>
                                 <div className="product-images-slider-thumbs-wrapper">
-                                    <img src={`http://127.0.0.1:8000/uploads/images/${item.image}.jpeg`} alt="" />
+                                    <img src={`${item.image}`} alt="" />
                                 </div>
                             </SwiperSlide>
                         ))}
@@ -85,9 +85,9 @@ const Detail = () => {
                         thumbs={{ swiper: activeThumb }}
                         className="product-images-slider"
                     >
-                        {findPImage.map((item, index) => (
+                        {allImages.map((item, index) => (
                             <SwiperSlide key={index}>
-                                  <img src={`http://127.0.0.1:8000/uploads/images/${item.image}.jpeg`} alt="" />
+                                  <img src={`${item.image}`} alt="" />
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -95,7 +95,7 @@ const Detail = () => {
                 <div className="flex flex-col gap-4 px-5">
                     <div className="flex flex-col gap-4">
                         <h1 className="text-[1.875rem] font-bold text-[#313131] uppercase ">
-                            {findP.name}
+                            {findP.title}
                         </h1>
                         <div className="flex gap-3">
                         <h2 className="text-red-500  text-3xl font-bold">
@@ -111,7 +111,7 @@ const Detail = () => {
                             {new Intl.NumberFormat({
                                 style: "currency",
                                 currency: "JPY",
-                            }).format(findP.price  - (findP.discount * findP.price / 100))}{" "}
+                            }).format(findP.price  + (findP.rating.rate * findP.price / 100))}{" "}
                             đ
                         </h2>
                         </div>
@@ -165,7 +165,7 @@ const Detail = () => {
                             </button>
                         </div>
                     </div>
-                    <div className=" py-5">
+                    <div className="flex flex-col gap-3 py-5">
                         <div>
                             <h1 className="inline text-gray-700 text-xl">
                                 Hoặc đặt mua:{" "}
@@ -176,6 +176,15 @@ const Detail = () => {
                             <h2 className="text-gray-700 text-xl inline">
                                 ( Tư vấn miễn phí )
                             </h2>
+                           
+                        </div>
+                        <div>
+                        <h2 className="text-black text-2xl">
+                                Mô tả
+                            </h2>
+                            {
+                                findP.description
+                            }
                         </div>
                     </div>
                     {/* <div>

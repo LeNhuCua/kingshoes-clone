@@ -37,10 +37,6 @@ const Sidebar = () => {
         <CustomLink_Mobile to="/spa">Spa giày</CustomLink_Mobile>
         <CustomLink_Mobile to="/contact">Liên hệ</CustomLink_Mobile>
      
-      
-
-
-
      
         </ul>
       </div>
